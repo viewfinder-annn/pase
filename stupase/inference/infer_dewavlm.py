@@ -12,7 +12,7 @@ from tqdm import tqdm
 from librosa.util import find_files
 from omegaconf import OmegaConf
 from models.wavlm.feature_extractor import WavLM_feat as Encoder
-from models.vocoder.wavlmdec import WavLMDec as Vocoder
+from models.vocoder.vocos.vocoder import VocosVocoder as Vocoder
 
 
 @torch.inference_mode()
@@ -48,7 +48,7 @@ def infer(args):
         input = torch.FloatTensor(noisy)[None,None].to(device)
         
         feat = encoder(input)
-        output = vocoder(feat)
+        output = vocoder(feat.transpose(1,2))
         
         esti_wav = output.cpu().detach().numpy().squeeze()
         esti_wav = esti_wav / np.max(np.abs(esti_wav)) * 0.9

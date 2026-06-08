@@ -49,7 +49,7 @@ python -m inference.inference -I <input_dir> -O <output_dir> [options]
 | `-D` (`--device`)     | default: `cuda:0`     | Torch device to run inference on, e.g., `cuda:0`, `cuda:1`, or `cpu`. |
 | `-E` (`--extension`)  | default: `.wav`       | Audio file extension to process.                                      |
 
-Audio examples are provided in `../test/audio_enh`.
+Audio examples are provided in `../test/audio_enh_pase`.
 
 ## Training
 ### Step 1: Training a single-stream vocoder

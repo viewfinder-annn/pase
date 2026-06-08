@@ -1,5 +1,7 @@
-# Copyright 2025 Cisco Systems, Inc. and its affiliates
-# Apache-2.0
+# Copyright (c) 2025 Xiaobin-Rong.
+# Adapted under MIT LICENSE.
+# Source: https://github.com/Xiaobin-Rong/SEtrain
+
 
 import os
 import sys
@@ -9,10 +11,11 @@ import torch
 import numpy as np
 import soundfile as sf
 from tqdm import tqdm
+import librosa
 from librosa.util import find_files
 from omegaconf import OmegaConf
-from models.wavlm.feature_extractor import WavLM_feat as Encoder
-from models.vocoder.wavlmdec import WavLMDec as Vocoder
+from models.mel.feature_extractor import Mel_feat
+from models.vocoder.vocos.vocoder import VocosVocoder as Model
 
 
 @torch.inference_mode()
@@ -20,49 +23,54 @@ def infer(args):
     cfg_infer = OmegaConf.load(args.config)
     cfg_network = OmegaConf.load(cfg_infer.network.config)
     
-    noisy_folder = cfg_infer.test_dataset.noisy_dir
-    clean_folder = cfg_infer.test_dataset.clean_dir
+    wav_folder = cfg_infer.test_dataset.clean_dir
     save_folder = cfg_infer.network.enh_folder
     os.makedirs(save_folder, exist_ok=True)
-    
     ext = cfg_infer.test_dataset.extension
     
-    wavs = sorted(find_files(noisy_folder, ext=ext))
-    print(f"Inference on folder: {noisy_folder}, {len(wavs)} files")
+    wavs = sorted(find_files(wav_folder, ext=ext))
+    print(f"Inference on folder: {wav_folder}, {len(wavs)} files")
     
     device = torch.device(f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu')
 
-    encoder = Encoder(**cfg_network['student_config']).to(device)
+    encoder = Mel_feat(**cfg_network['encoder_config']).to(device).eval()
+    model = Model(**cfg_network['vocoder_config']).to(device).eval()
     
-    checkpoint = torch.load(cfg_infer.network.checkpoint, map_location=device)
-    encoder.wavlm.load_state_dict(checkpoint['model'])
-
-    vocoder = Vocoder.from_pretrained(**cfg_network['vocoder_config']).to(device)
+    model.load_state_dict(
+        torch.load(cfg_infer['network']['checkpoint'], map_location=device)['generator']
+    )
 
     inf_scp_list = []
     ref_scp_list = []
     
     for wav_path in tqdm(wavs):
-        noisy, fs = sf.read(wav_path, dtype='float32')
-            
-        input = torch.FloatTensor(noisy)[None,None].to(device)
+        true_wav, fs = sf.read(wav_path, dtype='float32')
+        orig_len = len(true_wav)
+        
+        if fs != 16000:
+            true_wav = librosa.resample(true_wav, orig_sr=fs, target_sr=16000, res_type='soxr_hq')
+        
+        input = torch.FloatTensor(true_wav)[None].to(device)
         
         feat = encoder(input)
-        output = vocoder(feat)
+        output = model(feat)
         
         esti_wav = output.cpu().detach().numpy().squeeze()
-        esti_wav = esti_wav / np.max(np.abs(esti_wav)) * 0.9
         
-        if esti_wav.shape[-1] < noisy.shape[-1]:
-            esti_wav = np.pad(esti_wav, (0, noisy.shape[-1]-esti_wav.shape[-1]))
+        if fs != 16000:
+            esti_wav = librosa.resample(esti_wav, orig_sr=16000, target_sr=fs, res_type='soxr_hq')
+        
+        if esti_wav.shape[-1] < orig_len:
+            esti_wav = np.pad(esti_wav, (0, orig_len-esti_wav.shape[-1]))
         else:
-            esti_wav = esti_wav[..., :noisy.shape[-1]]
+            esti_wav = esti_wav[..., :orig_len]
+            
+        esti_wav = esti_wav / (np.max(np.abs(esti_wav)) + 1e-8) * 0.8
         
         uid = os.path.basename(wav_path).split(f'.{ext}')[0]
-        
-        true_path = os.path.join(clean_folder, f'{uid}.{ext}')
+        true_path = os.path.join(wav_folder, f'{uid}.{ext}')
         esti_path = os.path.join(save_folder, f'{uid}.{ext}')
-    
+        
         sf.write(esti_path, esti_wav, fs)
         
         inf_scp_list.append([uid, esti_path])

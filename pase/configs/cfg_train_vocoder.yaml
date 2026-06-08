@@ -48,11 +48,11 @@ samplerate:
   
 train_dataset:
   speech_scps: [
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_de_resampled_filtered_train.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_en_resampled_filtered_train.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_es_resampled_filtered_train.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_fr_resampled_filtered_train.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_zh-CN_resampled_filtered_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_de_resampled_filtered_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_en_resampled_filtered_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_es_resampled_filtered_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_fr_resampled_filtered_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_zh-CN_resampled_filtered_train.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_speech_resampled_filtered_train.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/libritts/meta_resampled_filtered_train.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/vctk/meta_train.scp,
@@ -71,11 +71,11 @@ train_dataloader:
 
 validation_dataset:
   speech_scps: [
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_de_resampled_validation.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_en_resampled_validation.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_es_resampled_validation.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_fr_resampled_validation.scp,
-    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_zh-CN_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_de_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_en_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_es_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_fr_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/commonvoice/meta_zh-CN_resampled_validation.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_speech_resampled_filtered_validation.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/libritts/meta_resampled_validation.scp,
     /work/user_data/xiaobin/Datasets/meta_files/URGENT2/vctk/meta_validation.scp,

@@ -1,0 +1,11 @@
+test_dataset: 
+  noisy_dir: /work/user_data/xiaobin/Datasets/simulated_test/librispeech/noisy
+  clean_dir: /work/user_data/xiaobin/Datasets/simulated_test/librispeech/clean
+  extension: wav
+
+network:
+  exp_path: /work/user_data/xiaobin/Experiments/exp_StuPASE/exp_flow_2026-06-08-07h30m
+  config: ${network.exp_path}/config.yaml
+  ckpt_name: model_080
+  checkpoint: ${network.exp_path}/checkpoints/${network.ckpt_name}.tar
+  enh_folder: ${network.exp_path}/${network.ckpt_name}/enhanced_librispeech
