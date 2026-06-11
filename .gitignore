@@ -2,3 +2,4 @@
 test_scipts/
 configs_local/
 pipe/
+evaluate.py

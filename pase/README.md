@@ -10,11 +10,11 @@
 
 ## Pretrained Checkpoints 
 Three checkpoints are provided:
-- `DeWavLM.tar`
-- `Vocoder-L24.tar`
-- `Vocoder-Dual.tar`
+- `DeWavLM.pt`
+- `Vocoder_L24.pt`
+- `Vocoder_Dual.pt`
 
-`DeWavLM.tar` and `Vcooder-Dual.tar` together form the PASE model.
+`DeWavLM.pt` and `Vocoder_Dual.pt` together form the PASE model.
 
 Note that the released checkpoint is trained on a relatively small dataset, including:
 - **Speech**: DNS5, LibriTTS, VCTK
@@ -24,8 +24,8 @@ Note that the released checkpoint is trained on a relatively small dataset, incl
 The performance of the retrained version compared to the original one:
 | Model | DNSMOS | UTMOS | SBS | LPS | SpkSim | WER (%) |
 |:-----:|:------:|:-----:|:---:|:---:|:------:|:-------:|
-| Vocoder-L24 (orig.) | 3.23 | 3.40 | 0.94 | 0.97 | 0.65 | 2.86 |
-| **Vocoder-L24 (retrained)** | 3.29 | 3.30 | 0.94 | 0.96 | 0.59 | 3.46 |
+| Vocoder_L24 (orig.) | 3.23 | 3.40 | 0.94 | 0.97 | 0.65 | 2.86 |
+| **Vocoder_L24 (retrained)** | 3.29 | 3.30 | 0.94 | 0.96 | 0.59 | 3.46 |
 | DeWavLM (orig.) | 3.26 | 3.42 | 0.88 | 0.93 | 0.57 | 7.62 |
 | **DeWavLM (retrained)** | 3.31 | 3.39 | 0.88 | 0.93 | 0.52 | 7.25
 | PASE (orig.) | 3.12   | 3.09  |0.90 |0.93 |0.80    | 7.49    |
@@ -33,7 +33,7 @@ The performance of the retrained version compared to the original one:
 
 It can be seen that the retrained version achieves performance very close to that of the original version on our simulated test set.
 
-**Note**: The Vocoder-L24 (retrained) was trained for only 60 epochs (30k iterations), as we found that it tends to overfit on such a small training set.
+**Note**: The Vocoder_L24 (retrained) was trained for only 60 epochs (30k iterations), as we found that it tends to overfit on such a small training set.
 
 ## Inference
 To run inference on audio files, make sure you are in the `pase` directory and use:

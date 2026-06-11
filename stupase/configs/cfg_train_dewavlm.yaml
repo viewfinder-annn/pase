@@ -5,13 +5,13 @@ teacher_config:
   frozen: True
 
 student_config:
-  wavlm_ckpt_path: "/work/user_data/xiaobin/Pre-trained/PASE/DeWavLM.tar"
+  wavlm_ckpt_path: "/work/user_data/xiaobin/Pre-trained/PASE/DeWavLM.pt"
   output_layer: 24
   load_pretrained: True
   frozen: False
 
 vocoder_config: 
-  ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/Vocoder_L24.tar"
+  ckpt_path: "/work/user_data/xiaobin/Pre-trained/PASE/Vocoder_L24.pt"
 
 DDP:
   world_size: 2  # not used

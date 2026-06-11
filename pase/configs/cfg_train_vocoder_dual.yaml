@@ -1,5 +1,5 @@
 encoder_config:
-  wavlm_ckpt_path: /work/user_data/xiaobin/Pre-trained/PASE_new/DeWavLM.tar
+  wavlm_ckpt_path: /work/user_data/xiaobin/Pre-trained/PASE_new/DeWavLM.pt
   output_layer: [1, 24]
 
 vocoder_config:

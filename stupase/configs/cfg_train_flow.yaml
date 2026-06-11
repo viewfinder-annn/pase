@@ -32,13 +32,13 @@ cfm_config:
   frac_lengths_mask_noisy: [0.5, 1.0]
 
 encoder_config:
-  wavlm_ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/DeWavLM-R.tar"
+  wavlm_ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/DeWavLM-R.pt"
   output_layer: 24
   load_pretrained: True
   frozen: True
 
 vocoder_config: 
-  ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/Vocoder_Mel-16k.tar"
+  ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/Vocoder_Mel-16k.pt"
   frozen: True
 
 sample_settings:
@@ -86,7 +86,7 @@ train_dataset:
   mode: train
 
 train_dataloader: 
-  batch_size: 40  # default: 60 per GPU
+  batch_size: 20  # default: 60 per GPU
   num_workers: 4
   drop_last: True
   pin_memory: True
@@ -125,6 +125,6 @@ trainer:
   epochs: 200
   save_checkpoint_interval: 10
   clip_grad_norm_value: 3.0
-  exp_path: /work/user_data/xiaobin/Experiments/exp_StuPASE/exp_flow
+  exp_path: /work/user_data/xiaobin/Experiments/exp_StuPASE_new/exp_flow
   resume: False
   resume_datetime: 2025-10-18-09h54m

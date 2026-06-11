@@ -7,12 +7,28 @@
 [StuPASE: Towards Low-Hallucination Studio-Quality Generative Speech Enhancement](https://arxiv.org/abs/2603.09234)
 
 ## Pretrained Checkpoints 
-Four checkpoints will be released soon:
-- `DeWavLM-R.tar`: the semantic enhancement module
-- `CFM.tar`: the flow-matching-based acoustic enhancement module
-- `Vocoder_L24.tar`: the vocoder for reconstructing waveforms from WavLM-L24 representations
-- `Vocoder_Mel-16k.tar`: the vocoder for reconstructing waveforms from Mel-spectrogram representations
+Three checkpoints will be released soon:
+- `DeWavLM-R.pt`: the semantic enhancement module
+- `CFM.pt`: the flow-matching-based acoustic enhancement module
+- `Vocoder_Mel-16k.pt`: the vocoder for reconstructing waveforms from Mel-spectrogram representations
 
+The list of training data used for the released checkpoint is as follows:
+- **Speech**: LibriVox (DNS5), LibriTTS, VCTK, LibriSpeech
+- **Noise**: DNS5
+- **RIRs**: OpenSLR26, OpenSLR28
+
+The speech and RIR portions are the same as in the original paper, but the noise part excludes three corpora: WHAM!, FSD50K, and FMA.
+
+
+The performance of the retrained version compared to the original one:
+| Model | DNSMOS | UTMOS | SBS | LPS | SpkSim | WER (%) |
+|:-----:|:------:|:-----:|:---:|:---:|:------:|:-------:|
+| DeWavLM-R (orig.) | 3.35 | 3.94 | 0.84 | 0.88 | 0.49 | 13.22 |
+| **DeWavLM-R (retrained)** | 3.38 | 3.62 | 0.85 | 0.89 | 0.41 | 12.27 |
+| StuPASE (orig.) | 3.37  | 4.08  | 0.85 |0.90 |0.68    | 11.57|
+| **StuPASE (retrained)** | 3.36 | 4.02 | 0.85 | 0.89 | 0.66 | 12.06 |
+
+It can be seen that the retrained version achieves performance very close to that of the original version on our simulated test set.
 
 ## Inference
 To run inference on audio files, ensure you are in the `stupase` directory and use:

@@ -12,9 +12,9 @@ from tqdm import tqdm
 
 from models.stupase import StuPASE
 
-dewavlm_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase/DeWavLM-R.tar"
-cfm_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase/CFM.tar"
-vocoder_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase/Vocoder_Mel-16k.tar"
+dewavlm_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase_new/DeWavLM-R.pt"
+cfm_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase_new/CFM.pt"
+vocoder_ckpt_path = "/work/project_data/disentangled_representations/shared_ckpt/stupase_new/Vocoder_Mel-16k.pt"
 
 
 def inference_file(input_file, output_file, model, **kwargs):

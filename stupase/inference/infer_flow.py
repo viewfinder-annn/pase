@@ -17,8 +17,8 @@ from models.wavlm.feature_extractor import WavLM_feat
 from models.vocoder.vocos.vocoder import VocosVocoder as Vocoder
 from models.flow.cfm import CFM as Model
 
-steps = 8  # 32
-cfg_strength = 0.5  # 2
+steps = 8
+cfg_strength = 0.5
 sway_sampling_coef = -1.0
 
 @torch.inference_mode()

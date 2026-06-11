@@ -11,7 +11,7 @@ student_config:
   frozen: False
 
 vocoder_config: 
-  ckpt_path: "/work/user_data/xiaobin/Pre-trained/PASE/Vocoder_L24.tar"
+  ckpt_path: "/work/user_data/xiaobin/Pre-trained/PASE/Vocoder_L24.pt"
 
 DDP:
   world_size: 4  # not used
