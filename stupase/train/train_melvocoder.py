@@ -1,6 +1,7 @@
 # Copyright (c) 2025 Xiaobin-Rong.
 # Adapted under MIT LICENSE.
 # Source: https://github.com/Xiaobin-Rong/SEtrain
+# License included under licenses/LICENSE_setrain.
 
 import os
 import sys

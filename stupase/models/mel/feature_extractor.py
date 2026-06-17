@@ -1,3 +1,7 @@
+# Copyright 2025 Cisco Systems, Inc. and its affiliates
+# Apache-2.0
+
+
 import torch
 import torch.nn as nn
 from torchaudio.transforms import MelSpectrogram

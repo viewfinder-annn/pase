@@ -12,17 +12,29 @@ Files authored by Cisco Systems, Inc. and its affiliates include the header:
 These files are licensed under the Apache License, Version 2.0 (see https://www.apache.org/licenses/LICENSE-2.0).
 
 Cisco-authored files:
-- `models/pase.py`
-- `models/wavlm/__init__.py`
-- `models/wavlm/feature_extractor.py`
-- `inference/inference.py`
-- `inference/infer_vocoder.py`
-- `inference/infer_vocoder_dual.py`
-- `inference/infer_wavlm.py`
-- `models/vocoder/wavlmdec.py`
-- `models/vocoder/wavlmdec_dual.py`
-- `train/dataloader.py`
-- `train/dataloader_clean.py`
+- `pase/models/pase.py`
+- `pase/models/wavlm/__init__.py`
+- `pase/models/wavlm/feature_extractor.py`
+- `pase/models/vocoder/wavlmdec.py`
+- `pase/models/vocoder/wavlmdec_dual.py`
+- `pase/inference/inference.py`
+- `pase/inference/infer_dewavlm.py`
+- `pase/inference/infer_vocoder.py`
+- `pase/inference/infer_vocoder_dual.py`
+- `pase/loaders/dataloader.py`
+- `pase/loaders/dataloader_clean.py`
+
+- `stupase/models/stupase.py`
+- `pase/models/wavlm/__init__.py`
+- `pase/models/wavlm/feature_extractor.py`
+- `stupase/models/mel/feature_extractor.py`
+- `stupase/inference/inference.py`
+- `stupase/inference/infer_dewavlm.py`
+- `stupase/inference/infer_flow.py`
+- `stupase/inference/infermelvocoder.py`
+- `pase/loaders/dataloader.py`
+- `pase/loaders/dataloader_clean.py`
+
 
 (If additional Cisco-authored `.py` files are added later, they should retain the same Apache-2.0 header.)
 

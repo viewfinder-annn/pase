@@ -1,6 +1,7 @@
-# Copyright 2025 Cisco Systems, Inc. and its affiliates
-# Adapted under Apache-2.0
-# Source: https://github.com/cisco-open/pase/blob/main/train/train_wavlm.py
+# Copyright (c) 2025 Xiaobin-Rong.
+# Adapted under MIT LICENSE.
+# Source: https://github.com/Xiaobin-Rong/SEtrain
+# License included under licenses/LICENSE_setrain.
 
 """
 Fine-tuning WavLM with denoising representation distillation (DRD) objective

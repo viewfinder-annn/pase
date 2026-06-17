@@ -1,7 +1,5 @@
-# Copyright (c) 2025 Xiaobin-Rong.
-# Adapted under MIT LICENSE.
-# Source: https://github.com/Xiaobin-Rong/SEtrain
-
+# Copyright 2025 Cisco Systems, Inc. and its affiliates
+# Apache-2.0
 
 import os
 import sys

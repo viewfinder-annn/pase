@@ -54,6 +54,13 @@ The following is a list of all third-party components and their respective licen
    Files: models/vocoder/discriminators.py
    License file: licenses/LICENSE_bigvgan
 
+8. SenSE Components
+   License: MIT License
+   Copyright: Copyright (c) 2025 ASLP-lab
+   Source: https://github.com/ASLP-lab/SenSE
+   Files: models/flow/cfm.py, models/flow/dit.py, models/flow/modules.py, models/flow/utils.py
+   License file: licenses/LICENSE_sense
+
 ================================================================================
 
 All third-party licenses are included in the licenses/ directory.
