@@ -1,0 +1,130 @@
+cfm_config:
+  dit_kwargs:
+    dim: 1024
+    mel_dim: 100
+    # text_num_embeds: 4096
+    text_in_dim: 1024
+    text_dim: 512
+    depth: 12  # 22
+    heads: 16
+    ff_mult: 2
+    conv_layers: 4
+    text_mask_padding: True
+    qk_norm: null  # null | rms_norm
+    pe_attn_head: null
+    checkpoint_activations: False  # recompute activations and save memory for extra compute
+
+  mel_spec_kwargs:
+    target_sample_rate: 16000
+    n_mel_channels: 100
+    hop_length: 320
+    win_length: 1280
+    n_fft: 1280
+    mel_spec_type: vocos  # vocos | bigvgan
+
+  odeint_kwargs: {method: euler}
+  sigma: 0.0
+  audio_drop_prob: 0.5
+  noisy_audio_drop_prob: 0.3
+  text_drop_prob: 0.3
+  cond_drop_prob: 0.2
+  frac_lengths_mask: [0.7, 1.0]
+  frac_lengths_mask_noisy: [0.5, 1.0]
+
+encoder_config:
+  wavlm_ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/DeWavLM-R.pt"
+  output_layer: 24
+  load_pretrained: True
+  frozen: True
+
+vocoder_config: 
+  ckpt_path: "/work/user_data/xiaobin/Pre-trained/StuPASE/Vocoder_Mel-16k.pt"
+  frozen: True
+
+sample_settings:
+  steps: 8
+  cfg_strength: 0.5
+  sway_sampling_coef: -1.0
+
+DDP:
+  world_size: 2  # not used
+
+optimizer:
+  lr: 0.001  # not used
+
+scheduler:
+  warmup_steps: 10000
+  decay_until_step: 110000
+  max_lr: 1e-4
+  min_lr: 1e-6
+
+samplerate:
+  16000
+
+train_dataset:
+  speech_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_speech_resampled_filtered_train_utmosgt4.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/libritts/meta_resampled_filtered_train_utmosgt4.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/vctk/meta_train_utmosgt4.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/LibriSpeech_cleaned/train-clean-100_utmosgt4.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/LibriSpeech_cleaned/train-clean-360_utmosgt4.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/LibriSpeech_cleaned/train-other-500_utmosgt4.scp,
+  ]
+  noise_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_noise_resampled_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/fma/meta_noise_resampled_train.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/fsd50k/meta_noise_resampled_train.scp
+  ]
+  rir_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_rir.scp
+  ]
+  wav_len: 4
+  num_per_epoch: 60000  # bs * num_gpus * 500 iters/epoch
+  random_start: True
+  snr_range: [-5, 15]
+  default_fs: 16000
+  mode: train
+
+train_dataloader: 
+  batch_size: 20  # default: 60 per GPU
+  num_workers: 4
+  drop_last: True
+  pin_memory: True
+  prefetch_factor: 4
+  persistent_workers: True
+
+validation_dataset:
+  speech_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_speech_resampled_filtered_validation.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/libritts/meta_resampled_validation.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/vctk/meta_validation.scp,
+    /work/user_data/xiaobin/Datasets/meta_files/LibriSpeech_cleaned/dev-clean.scp,    
+  ]
+  noise_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_noise_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/fma/meta_noise_resampled_validation.scp,
+    # /work/user_data/xiaobin/Datasets/meta_files/URGENT2/fsd50k/meta_noise_resampled_validation.scp
+  ]
+  rir_scps: [
+    /work/user_data/xiaobin/Datasets/meta_files/URGENT2/dns5_fullband/meta_rir.scp
+  ]
+  wav_len: 4
+  num_per_epoch: 1000
+  random_start: False
+  snr_range: [-5, 15]
+  default_fs: 16000
+  mode: validation
+
+validation_dataloader: 
+  batch_size: 1
+  num_workers: 4
+  drop_last: True
+  pin_memory: True
+
+trainer:
+  epochs: 200
+  save_checkpoint_interval: 10
+  clip_grad_norm_value: 3.0
+  exp_path: /work/user_data/xiaobin/Experiments/exp_StuPASE_new/exp_flow
+  resume: False
+  resume_datetime: 2025-10-18-09h54m

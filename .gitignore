@@ -1,2 +1,5 @@
 **/__pycache__/
-/test_scipts/
+test_scipts/
+configs_local/
+pipe/
+evaluate.py
